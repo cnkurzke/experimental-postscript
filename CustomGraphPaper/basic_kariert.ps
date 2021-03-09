@@ -1,0 +1,39 @@
+%!PS
+
+/ppi 72 def
+/mmpi 25.4 def
+/pagewidth  currentpagedevice /PageSize get 0 get def
+/pageheight currentpagedevice /PageSize get 1 get def
+/hmargin 0.8 ppi mul def
+/vmargin 0.5 ppi mul def
+/spacing 5 ppi mmpi div mul def
+/linewidth 0.75 def
+/markwidth linewidth 2 mul def
+spacing ==
+
+/drawline {
+    /y_offset exch def
+
+    linewidth setlinewidth
+    0.5 setgray
+    hmargin y_offset moveto
+    pagewidth hmargin sub
+    y_offset lineto
+    stroke
+
+    markwidth setlinewidth
+    0 setgray
+    hmargin spacing pagewidth hmargin sub {
+        newpath
+        y_offset moveto
+        markwidth 0 rlineto
+        stroke
+    } for
+
+} def
+
+vmargin spacing pageheight vmargin sub {
+    drawline
+} for
+
+showpage
